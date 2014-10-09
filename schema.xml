@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<schema name="reviews_by_day" version="1.5">
+
+ <fields>
+
+    <field name="day" indexed="true" stored="true" required="true" type="myInt" />
+    <field name="productid" indexed="true" stored="true" required="true" type="myString" />
+    <field name="userid" indexed="true" stored="true" required="true" type="myString" />
+    <field name="reviewid" indexed="true" stored="true" required="true" type="myUUID" />
+    <field name="profilename" indexed="true" stored="true" required="true" type="myString" />
+    <field name="helpfulness" indexed="true" stored="true" required="true" type="myString" />
+    <field name="score" indexed="true" stored="true" required="true" type="myString" />
+    <field name="summary" indexed="true" stored="true" required="true" type="myString" />
+    <field name="review" indexed="true" stored="true" required="true" type="myString" />
+    <field name="time" indexed="true" stored="true" required="true" type="myTime" />
+
+
+
+
+</fields>
+
+<uniqueKey>(reviewid, userid, productid, time)</uniqueKey>
+
+
+ <types>
+    <fieldType name="myUUID" class="solr.UUIDField" ></fieldType>
+    <fieldType name="myInt" class="solr.IntField"></fieldType>
+    <fieldType name="myTime" class="solr.DateField"></fieldType>
+
+
+    <fieldType name="myString" class="solr.TextField" positionIncrementGap="100">
+      
+      <analyzer type="index">
+          <tokenizer class="solr.WhitespaceTokenizerFactory" />
+          <filter class="solr.LowerCaseFilterFactory" />
+      </analyzer>
+      <analyzer type="query">
+          <tokenizer class="solr.WhitespaceTokenizerFactory" />
+          <filter class="solr.LowerCaseFilterFactory" />
+      </analyzer> 
+
+    </fieldType>
+ </types>
+</schema>
+
